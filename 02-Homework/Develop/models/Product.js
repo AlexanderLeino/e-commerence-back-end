@@ -37,7 +37,11 @@ Product.init(
             },
     category_id: {
       type: DataTypes.INTEGER,
-      //TODO: References the Category model's id
+      //References the Category model's id
+      references: {
+        model: 'category',
+        key: 'id'
+      }
     }
     }
 
@@ -50,17 +54,5 @@ Product.init(
     modelName: 'product',
   }
 );
-
-
-// Product belongs to Category, and Category has many Product models, as a category can have multiple products but a product can only belong to one category.
-Product.belongsTo(Category)
-Category.hasMany(Product)
-Product.hasOne(Category)
-
-//TODO:
-// Product belongs to many Tag models, and Tag belongs to many Product models. Allow products to have multiple tags and tags to have many products by using the ProductTag through model.
-
-
-
 
 module.exports = Product;
