@@ -47,28 +47,17 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-  Category.update(
-    {
-      category_name: req.body.category_name
-    },
-    {
-      where: {
-        id: req.params.id
-      }
-    })
-    .then(categoryData => {
-      if (!categoryData) {
-        res.status(404).json({ message: 'No Category found with that ID.' });
-        return;
-      }
-      res.json(categoryData);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-// update a category by its id value
-});
+  console.log('The put route was hit')
+  console.log(req.params.id)
+try {
+  await Category.update(
+    {category_name: req.body.category_name},
+    {where: req.params.id}
+  )
+}catch(e) {
+  res.json(e).status(500)
+}
+})
 
 router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
