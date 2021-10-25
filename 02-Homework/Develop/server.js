@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(routes);
 
-sequelize.sync({force: true}).then(() => {
+sequelize.sync({force: false}).then(() => {
   console.log('Sequelize has been Connected! Congrats')
 })
 
